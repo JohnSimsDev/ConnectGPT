@@ -1,4 +1,4 @@
-name:  Auto Deploy to GitHub Pages
+name: 🚀 Deploy to GitHub Pages
 
 on:
   push:
@@ -6,21 +6,20 @@ on:
       - main
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: ⬇Checkout repo
+      - name: 📥 Checkout Code
         uses: actions/checkout@v3
 
-      - name:  Copy site to deploy folder
-        run: |
-          mkdir output
-          cp -r * output/
-          cp .nojekyll output/
+      - name: ⚙️ Setup Pages
+        uses: actions/configure-pages@v3
 
-      - name:  Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+      - name: 🚀 Upload to GitHub Pages
+        uses: actions/upload-pages-artifact@v1
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./output
+          path: '.'
+
+      - name: 🟢 Deploy
+        uses: actions/deploy-pages@v2
