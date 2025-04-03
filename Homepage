@@ -1,0 +1,409 @@
+<!-- [START FULL SITE CODE WITH DISCORD + TIKTOK + BUTTON] -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>John Sims Coaching</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #1c1c1c, #2c3e50);
+      color: #f0f0f0;
+      margin: 0;
+      padding: 0;
+    }
+
+    header, footer {
+      background: #00ff88;
+      color: #000;
+      text-align: center;
+      padding: 20px 0;
+      animation: fadeDown 1s ease-in-out;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5em;
+      animation: slideFade 1s ease-in-out forwards;
+    }
+
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideFade {
+      from { transform: translateY(-20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      padding: 12px;
+      background: #121212;
+      border-bottom: 3px solid #00ff88;
+    }
+
+    nav a {
+      color: #00ff88;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.1em;
+      transition: all 0.3s ease-in-out;
+    }
+
+    nav a:hover {
+      color: #fff;
+      transform: scale(1.1);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 30px 20px;
+    }
+
+    h2 {
+      border-left: 5px solid #00ff88;
+      padding-left: 15px;
+      margin-top: 40px;
+      color: #00ffcc;
+      animation: fadeDown 1s ease-in-out;
+    }
+
+    iframe {
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0,255,136,0.2);
+    }
+
+    .side-buttons {
+      position: fixed;
+      top: 50%;
+      right: 0;
+      transform: translateY(-50%);
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .side-button {
+      background-color: #00ff88;
+      color: #000;
+      padding: 12px 20px;
+      border-radius: 10px 0 0 10px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .side-button:hover {
+      background-color: #00dd77;
+      transform: translateX(-5px);
+    }
+
+    .popup-panel {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 400px;
+      height: 100vh;
+      background: #1a1a1a;
+      color: white;
+      overflow-y: auto;
+      box-shadow: -4px 0 10px rgba(0,0,0,0.5);
+      transform: translateX(100%);
+      transition: transform 0.4s ease-in-out;
+      z-index: 9998;
+    }
+
+    .popup-panel.open {
+      transform: translateX(0);
+    }
+
+    .popup-panel iframe {
+      width: 100%;
+      height: calc(100% - 40px);
+      border: none;
+    }
+
+    .close-btn {
+      background: #ff4444;
+      color: white;
+      padding: 10px;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    .tiktok-feed, .discord-widget {
+      margin-top: 50px;
+      text-align: center;
+    }
+
+    .tiktok-feed h2, .discord-widget h2 {
+      color: #00ffcc;
+      margin-bottom: 20px;
+      animation: fadeDown 1s ease-in-out;
+    }
+
+    .social-section, .footer-socials {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      margin: 30px 0;
+      flex-wrap: wrap;
+    }
+
+    .social-section a, .footer-socials a {
+      color: #00ffcc;
+      text-decoration: none;
+      font-size: 1.2em;
+      transition: all 0.3s ease;
+    }
+
+    .social-section a:hover, .footer-socials a:hover {
+      color: #fff;
+      transform: scale(1.1);
+    }
+
+    .newsletter input[type="email"] {
+      padding: 10px;
+      width: 300px;
+      border: none;
+      border-radius: 5px;
+    }
+
+    .newsletter button {
+      padding: 10px 20px;
+      background: #00ff88;
+      color: #000;
+      font-weight: bold;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .newsletter button:hover {
+      background: #00dd77;
+      transform: scale(1.05);
+    }
+
+    .discord-pop {
+      position: fixed;
+      bottom: 30px;
+      left: 30px;
+      background: #7289da;
+      color: white;
+      padding: 15px 25px;
+      border-radius: 50px;
+      font-weight: bold;
+      cursor: pointer;
+      z-index: 9999;
+      animation: popIn 1s infinite alternate;
+      box-shadow: 0 0 15px #7289da88;
+    }
+
+    @keyframes popIn {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.1); }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Welcome to John Sims Coaching</h1>
+</header>
+
+<nav>
+  <a href="#">Home</a>
+  <a href="#articles">Articles</a>
+  <a href="#newsletter">Newsletter</a>
+  <a href="#contact">Contact</a>
+</nav>
+
+<div class="container">
+  <!-- Main Playlist -->
+  <div class="playlist">
+    <h2>🎥 Coaching Video Playlist</h2>
+    <iframe
+      width="100%"
+      height="400"
+      src="https://www.youtube.com/embed/videoseries?list=PLUIxKIJBlJxXKwEAUd_ySNNuaHB28gf57"
+      frameborder="0"
+      allowfullscreen>
+    </iframe>
+  </div>
+
+  <!-- Twitch Stream -->
+  <div class="twitch">
+    <h2>🎮 Live Twitch Stream</h2>
+    <iframe
+      src="https://player.twitch.tv/?channel=johnsims_&parent=simsmedia.us"
+      height="400"
+      width="100%"
+      allowfullscreen>
+    </iframe>
+  </div>
+
+<section id="tiktok-feed" style="text-align:center; padding: 60px 20px; background:#111;">
+  <h2 style="color:#00ffcc; margin-bottom: 30px;">🎵 Latest TikToks</h2>
+  <div id="tiktok-container" style="display:flex; flex-wrap:wrap; justify-content:center; gap:30px;"></div>
+</section>
+
+<script>
+const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRxxxxxxx/pub?output=csv";
+
+fetch(sheetURL)
+  .then(res => res.text())
+  .then(csv => {
+    const lines = csv.trim().split('\n');
+    const container = document.getElementById("tiktok-container");
+
+    lines.slice(0, 3).forEach(url => {
+      const videoId = url.match(/video\/(\d+)/)?.[1];
+      if (videoId) {
+        const block = document.createElement('blockquote');
+        block.className = 'tiktok-embed';
+        block.setAttribute('cite', url);
+        block.setAttribute('data-video-id', videoId);
+        block.style = "max-width:325px;min-width:200px;";
+        block.innerHTML = "<section></section>";
+        container.appendChild(block);
+      }
+    });
+
+    const script = document.createElement('script');
+    script.src = 'https://www.tiktok.com/embed.js';
+    script.async = true;
+    document.body.appendChild(script);
+  });
+</script>
+
+<!-- 💬 Join the Community -->
+<section style="padding: 60px 20px; background: #121212; text-align: center;">
+  <h2 style="color: #00ff88;">💬 Join the Discord Community</h2>
+  <p style="color: #ccc;">Talk gameplay, tactics, trading, and share clips with the community.</p>
+
+  <div style="display: flex; flex-direction: column; align-items: center; gap: 20px; margin-top: 30px;">
+    <iframe 
+      src="https://discord.com/widget?id=547593208771903490&theme=dark" 
+      width="350" 
+      height="500" 
+      allowtransparency="true" 
+      frameborder="0" 
+      sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts">
+    </iframe>
+
+    <a href="https://discord.gg/547593208771903490" 
+       target="_blank" 
+       style="background:#00ff88; color:#000; padding:15px 30px; font-weight:bold; border-radius:8px; text-decoration:none; transition:0.3s;">
+       🚀 Join Discord
+    </a>
+  </div>
+</section>
+://discord.com/widget?id=547593208771903490&theme=dark" 
+    width="100%" 
+    height="500" 
+    allowtransparency="true" 
+    frameborder="0" 
+    sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-forms">
+  </iframe>
+</div>
+
+
+  <!-- Newsletter -->
+  <div class="newsletter" id="newsletter">
+    <h2>📬 Get the Newsletter</h2>
+    <p>Receive strategy tips and announcements straight to your inbox.</p>
+    <form>
+      <input type="email" placeholder="Enter your email" required />
+      <button type="submit">Join</button>
+    </form>
+  </div>
+
+  <!-- Social Links -->
+  <div class="social-section">
+    <a href="https://www.twitch.tv/johnsims_" target="_blank">🎮 Twitch</a>
+    <a href="https://www.youtube.com/@JohnSims_" target="_blank">📺 YouTube</a>
+    <a href="https://twitter.com/johnsims__" target="_blank">🐦 Twitter/X</a>
+    <a href="https://futalert.co.uk" target="_blank">⚡ FUTAlert</a>
+    <a href="https://tiktok.com/@johnsims_" target="_blank">🎵 TikTok</a>
+  </div>
+</div>
+
+<!-- Pop Panel Triggers -->
+<div class="side-buttons">
+  <div class="side-button" onclick="togglePanel('bookingWidget')">📅 Book Now</div>
+  <div class="side-button" id="twitchChatBtn" style="display:none;" onclick="togglePanel('twitchChatWidget')">
+    💬 Twitch Chat <span class="live-indicator" id="liveIndicator" style="display:none;"></span>
+  </div>
+</div>
+
+<!-- Pop Panel Widgets -->
+<div class="popup-panel" id="bookingWidget">
+  <div class="close-btn" onclick="togglePanel('bookingWidget')">✖ Close</div>
+  <iframe src="https://tidycal.com/johnsimsbusiness/60-minute-meeting"></iframe>
+</div>
+
+<div class="popup-panel" id="twitchChatWidget">
+  <div class="close-btn" onclick="togglePanel('twitchChatWidget')">✖ Close</div>
+  <iframe src="https://www.twitch.tv/embed/johnsims_/chat?parent=simsmedia.us"></iframe>
+</div>
+
+<!-- Discord Floating Button -->
+<div class="discord-pop" onclick="document.querySelector('.discord-widget').scrollIntoView({behavior: 'smooth'});">
+  💬 Join Discord
+</div>
+
+<!-- Scripts -->
+<script>
+function togglePanel(id) {
+  document.querySelectorAll('.popup-panel').forEach(el => {
+    if (el.id !== id) el.classList.remove('open');
+  });
+  const panel = document.getElementById(id);
+  panel.classList.toggle('open');
+}
+
+async function checkTwitchLive() {
+  try {
+    const response = await fetch('https://api.twitch.tv/helix/streams?user_login=johnsims_', {
+      headers: {
+        'Client-ID': 'Aa40vtygHpgJ57_yWxhoKavSwfF-6JehZzKx0SsuTvWBC-W6mczfIVAUBH5twUcwgGDcG3-w4Hf_3K4j',
+        'Authorization': 'Bearer YOUR_OAUTH_TOKEN'
+      }
+    });
+    const data = await response.json();
+    const isLive = data.data && data.data.length > 0;
+    if (isLive) {
+      document.getElementById('twitchChatBtn').style.display = 'block';
+      document.getElementById('liveIndicator').style.display = 'inline-block';
+    }
+  } catch (e) {
+    console.error('Twitch live check failed:', e);
+  }
+}
+
+checkTwitchLive();
+</script>
+
+<footer>
+  <p>&copy; 2025 John Sims Coaching | All Rights Reserved</p>
+  <div class="footer-socials">
+    <a href="https://www.twitch.tv/johnsims_" target="_blank">Twitch</a>
+    <a href="https://www.youtube.com/@JohnSims_" target="_blank">YouTube</a>
+    <a href="https://twitter.com/johnsims__" target="_blank">Twitter/X</a>
+    <a href="https://futalert.co.uk" target="_blank">FUTAlert</a>
+    <a href="https://tiktok.com/@johnsims_" target="_blank">TikTok</a>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- [END FULL SITE] -->
